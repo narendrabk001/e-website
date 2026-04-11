@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UrbanCart Pro | Admin Panel + Billing + Auth</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <title>Jumli Marsi Bazae | Organic Agricultural E-mart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,9 +14,20 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f1f5f9;
-            color: #0f172a;
+            font-family: 'Poppins', sans-serif;
+            background: #fef8e7;
+            color: #2d3e2b;
+        }
+
+        /* Color Theme: Green (#2e7d32), Red (#d32f2f), White (#ffffff) */
+        :root {
+            --primary-green: #2e7d32;
+            --primary-green-light: #4caf50;
+            --primary-red: #d32f2f;
+            --primary-red-light: #ef5350;
+            --pure-white: #ffffff;
+            --cream-bg: #fef8e7;
+            --dark-text: #1b5e20;
         }
 
         /* Auth Modal */
@@ -26,30 +37,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
 
         .auth-card {
-            background: white;
+            background: var(--pure-white);
             border-radius: 1.5rem;
             padding: 2rem;
-            max-width: 420px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--primary-green);
         }
 
         .auth-card h2 {
+            color: var(--primary-green);
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            text-align: center;
         }
 
         .input-group {
@@ -60,56 +70,62 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #334155;
+            color: #2d3e2b;
         }
 
-        .input-group input {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 0.75rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #c8e6c9;
             border-radius: 0.5rem;
             font-family: inherit;
-            transition: border 0.2s;
+            transition: all 0.2s;
         }
 
         .input-group input:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
         }
 
         .auth-btn {
             width: 100%;
             padding: 0.75rem;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background: var(--primary-green);
             color: white;
             border: none;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
             margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .auth-btn:hover {
+            background: var(--primary-green-light);
         }
 
         .switch-auth {
             text-align: center;
             margin-top: 1rem;
-            color: #64748b;
+            color: #666;
             cursor: pointer;
         }
 
         .switch-auth span {
-            color: #2563eb;
+            color: var(--primary-green);
             font-weight: 600;
         }
 
-        /* Main App (hidden until auth) */
+        /* Main App */
         .app-container {
             display: none;
         }
 
-        /* Header */
+        /* Header & Navigation */
         .header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background: var(--pure-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -123,15 +139,36 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--primary-green);
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #2d3e2b;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-green);
+            font-weight: 600;
         }
 
         .user-info {
@@ -140,13 +177,16 @@
             gap: 1rem;
         }
 
-        .user-email {
-            font-size: 0.9rem;
-            color: #475569;
+        .user-badge {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
         }
 
         .logout-btn {
-            background: #ef4444;
+            background: var(--primary-red);
             color: white;
             border: none;
             padding: 0.5rem 1rem;
@@ -155,71 +195,141 @@
             font-weight: 500;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            background: white;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #e2e8f0;
-            max-width: 1400px;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            background: none;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 0.5rem;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        /* Content */
-        .content {
+        /* Section Container */
+        .container {
             max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
 
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-red);
+            padding-left: 1rem;
         }
 
         /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .product-card {
-            background: white;
+            background: var(--pure-white);
             border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
         }
 
-        .product-card img {
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.6rem;
+            background: var(--primary-green);
+            color: white;
+            border: none;
             border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transition: right 0.3s;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1rem;
+            background: var(--primary-green);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-total {
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+            font-weight: 700;
         }
 
         /* Admin Panel */
-        .admin-stats {
+        .admin-panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
@@ -227,87 +337,54 @@
         }
 
         .stat-card {
-            background: white;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            color: white;
+            padding: 1rem;
             border-radius: 1rem;
             text-align: center;
         }
 
-        .orders-list, .users-list {
-            background: white;
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .order-item, .user-item {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Billing Section */
-        .billing-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .invoice-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .total-amount {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2563eb;
-            margin-top: 1rem;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        .add-product-form {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+        /* Forms */
+        .form-group {
             margin-bottom: 1rem;
         }
 
-        .primary-btn {
-            background: #2563eb;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #c8e6c9;
             border-radius: 0.5rem;
-            font-weight: 500;
         }
 
-        .danger-btn {
-            background: #ef4444;
+        .btn-primary {
+            background: var(--primary-green);
             color: white;
+            padding: 0.75rem 1.5rem;
             border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background: var(--primary-red);
+            color: white;
             padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 768px) {
-            .nav-container, .tabs, .content { padding: 1rem; }
-            .tab-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .nav-container { flex-direction: column; }
+            .nav-links { justify-content: center; }
         }
     </style>
 </head>
@@ -316,19 +393,27 @@
 <!-- Auth Modal -->
 <div id="authModal" class="auth-modal">
     <div class="auth-card">
-        <h2 id="authTitle">Welcome Back</h2>
+        <h2 id="authTitle">🌾 Welcome to Jumli Marsi</h2>
         <div id="authForm">
             <div class="input-group">
-                <label>Email (Gmail)</label>
-                <input type="email" id="emailInput" placeholder="yourname@gmail.com" required>
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" placeholder="you@example.com">
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phoneNo" placeholder="98XXXXXXXX">
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" id="passwordInput" placeholder="••••••••" required>
+                <input type="password" id="regPassword" placeholder="••••••••">
             </div>
-            <button class="auth-btn" id="submitAuthBtn">Login</button>
+            <button class="auth-btn" id="submitAuthBtn">Register</button>
             <div class="switch-auth" id="switchAuthBtn">
-                Don't have an account? <span>Register</span>
+                Already have an account? <span>Login</span>
             </div>
         </div>
     </div>
@@ -338,104 +423,75 @@
 <div class="app-container" id="appContainer">
     <div class="header">
         <div class="nav-container">
-            <div class="logo">UrbanCart Pro</div>
+            <div class="logo">Jumli <span>Marsi</span> Bazae</div>
+            <div class="nav-links">
+                <a class="nav-link active" data-section="home">Home</a>
+                <a class="nav-link" data-section="products">Products</a>
+                <a class="nav-link" data-section="shop">Shop</a>
+                <a class="nav-link" data-section="about">About</a>
+                <a class="nav-link" data-section="help">Help</a>
+                <a class="nav-link" data-section="admin" id="adminNavLink" style="display: none;">Admin Panel</a>
+            </div>
             <div class="user-info">
-                <span class="user-email" id="userEmailDisplay"></span>
+                <span class="user-badge" id="userNameDisplay"></span>
                 <button class="logout-btn" id="logoutBtn">Logout</button>
+                <button class="logout-btn" id="cartBtn" style="background: var(--primary-green);">🛒 Cart (<span id="cartCount">0</span>)</button>
             </div>
         </div>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="shop">🛍️ Shop</button>
-        <button class="tab-btn" data-tab="billing">💰 Billing</button>
-        <button class="tab-btn" data-tab="admin" id="adminTabBtn" style="display: none;">⚙️ Admin Panel</button>
+    <div id="contentArea"></div>
+
+    <footer>
+        <p>🌾 Jumli Marsi Bazae - Organic Agricultural Products from the Himalayas</p>
+        <p>📍 Jumla, Nepal | 📞 +977-98XXXXXXXX | 📧 info@jumlimarsi.com</p>
+    </footer>
+</div>
+
+<!-- Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button id="closeCartBtn" style="background: none; border: none; color: white; font-size: 1.5rem;">&times;</button>
     </div>
-
-    <div class="content">
-        <!-- Shop Tab -->
-        <div class="tab-pane active" id="shopTab">
-            <h2>Our Products</h2>
-            <div class="products-grid" id="productsGrid"></div>
-        </div>
-
-        <!-- Billing Tab -->
-        <div class="tab-pane" id="billingTab">
-            <h2>Your Billing History</h2>
-            <div id="billingHistory"></div>
-        </div>
-
-        <!-- Admin Tab -->
-        <div class="tab-pane" id="adminTab">
-            <h2>Admin Dashboard</h2>
-            <div class="admin-stats">
-                <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <p id="totalUsers">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Orders</h3>
-                    <p id="totalOrders">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Revenue</h3>
-                    <p id="totalRevenue">$0</p>
-                </div>
-            </div>
-
-            <div class="add-product-form">
-                <h3>Add New Product</h3>
-                <div class="form-row">
-                    <input type="text" id="prodName" placeholder="Product Name">
-                    <input type="number" id="prodPrice" placeholder="Price">
-                    <input type="text" id="prodImage" placeholder="Image URL">
-                </div>
-                <button class="primary-btn" id="addProductBtn">+ Add Product</button>
-            </div>
-
-            <h3>Manage Products</h3>
-            <div class="products-grid" id="adminProductsGrid"></div>
-
-            <h3 style="margin-top: 2rem;">All Users</h3>
-            <div class="users-list" id="usersList"></div>
-
-            <h3 style="margin-top: 2rem;">All Orders</h3>
-            <div class="orders-list" id="ordersList"></div>
-        </div>
+    <div id="cartItemsList" class="cart-items"></div>
+    <div class="cart-total">
+        <strong>Total: NPR <span id="cartTotal">0</span></strong>
+        <button id="checkoutBtn" class="btn-primary" style="width: 100%; margin-top: 1rem;">Place Order</button>
     </div>
 </div>
 
 <script>
     // ==================== DATA MODELS ====================
-    let users = JSON.parse(localStorage.getItem('ecom_users')) || [];
-    let products = JSON.parse(localStorage.getItem('ecom_products')) || [
-        { id: 1, name: "Classic Backpack", price: 79.99, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&h=300&fit=crop" },
-        { id: 2, name: "Minimalist Watch", price: 129.99, image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300&h=300&fit=crop" },
-        { id: 3, name: "Organic Hoodie", price: 59.99, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=300&fit=crop" },
-        { id: 4, name: "Wireless Earbuds", price: 99.99, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=300&h=300&fit=crop" }
+    let users = JSON.parse(localStorage.getItem('agri_users')) || [];
+    let products = JSON.parse(localStorage.getItem('agri_products')) || [
+        { id: 1, name: "Jumli Marsi Rice (1kg)", price: 350, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Organic red rice from Jumla" },
+        { id: 2, name: "Organic Buckwheat (1kg)", price: 280, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "High altitude buckwheat" },
+        { id: 3, name: "Local Apple (1kg)", price: 250, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=300&h=300&fit=crop", description: "Fresh Jumla apples" },
+        { id: 4, name: "Ghee (500ml)", price: 600, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Pure local ghee" },
+        { id: 5, name: "Honey (250g)", price: 450, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Wild mountain honey" }
     ];
-    let orders = JSON.parse(localStorage.getItem('ecom_orders')) || [];
+    let orders = JSON.parse(localStorage.getItem('agri_orders')) || [];
     let currentUser = null;
-    let nextProductId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 5;
-
-    // Cart for current session
     let cart = [];
+    let currentSection = 'home';
 
-    // ==================== AUTH SYSTEM ====================
-    function saveUsers() { localStorage.setItem('ecom_users', JSON.stringify(users)); }
-    function saveProducts() { localStorage.setItem('ecom_products', JSON.stringify(products)); }
-    function saveOrders() { localStorage.setItem('ecom_orders', JSON.stringify(orders)); }
+    // Save functions
+    function saveUsers() { localStorage.setItem('agri_users', JSON.stringify(users)); }
+    function saveProducts() { localStorage.setItem('agri_products', JSON.stringify(products)); }
+    function saveOrders() { localStorage.setItem('agri_orders', JSON.stringify(orders)); }
 
-    function registerUser(email, password) {
-        if (!email.endsWith('@gmail.com')) {
-            alert('Please use a Gmail address (must end with @gmail.com)');
+    // Auth Functions
+    function registerUser(name, email, phone, password) {
+        if (!email || !phone || !password) {
+            alert('Please fill all fields');
             return false;
         }
         if (users.find(u => u.email === email)) {
-            alert('User already exists! Please login.');
+            alert('Email already registered!');
             return false;
         }
-        users.push({ email, password, isAdmin: email === 'admin@gmail.com' || users.length === 0 });
+        users.push({ name, email, phone, password, isAdmin: email === 'admin@jumli.com' || users.length === 0, joinDate: new Date().toISOString() });
         saveUsers();
         alert('Registration successful! Please login.');
         return true;
@@ -445,33 +501,155 @@
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
             currentUser = user;
-            localStorage.setItem('ecom_currentUser', JSON.stringify({ email: user.email, isAdmin: user.isAdmin }));
+            localStorage.setItem('agri_currentUser', JSON.stringify({ email: user.email, name: user.name, isAdmin: user.isAdmin }));
             return true;
         }
-        alert('Invalid credentials');
+        alert('Invalid email or password');
         return false;
     }
 
     function logout() {
         currentUser = null;
-        localStorage.removeItem('ecom_currentUser');
+        localStorage.removeItem('agri_currentUser');
         cart = [];
         document.getElementById('authModal').style.display = 'flex';
         document.getElementById('appContainer').style.display = 'none';
     }
 
-    // ==================== SHOP & CART ====================
+    // Render Functions
+    function renderHome() {
+        return `
+            <div class="hero">
+                <h1>🌾 Jumli Marsi Bazae</h1>
+                <p>100% Organic Agricultural Products from the Heart of Jumla, Nepal</p>
+            </div>
+            <div class="container">
+                <h2 class="section-title">Welcome to Our Organic Mart</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">We bring the finest organic products from the high Himalayas to your doorstep. Jumli Marsi rice, local apples, buckwheat, and more - all grown naturally with love and care.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                        <i class="fas fa-seedling" style="font-size: 3rem; color: var(--primary-green);"></i>
+                        <h3>100% Organic</h3>
+                        <p>Certified organic products</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                        <i class="fas fa-truck" style="font-size: 3rem; color: var(--primary-green);"></i>
+                        <h3>Free Delivery</h3>
+                        <p>On orders over NPR 2000</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
+                        <i class="fas fa-leaf" style="font-size: 3rem; color: var(--primary-green);"></i>
+                        <h3>Farm Fresh</h3>
+                        <p>Direct from farmers</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
     function renderProducts() {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
-        grid.innerHTML = products.map(product => `
+        return `
+            <div class="container">
+                <h2 class="section-title">Our Organic Products</h2>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        `;
+    }
+
+    function renderShop() {
+        return `
+            <div class="container">
+                <h2 class="section-title">Shop Online</h2>
+                <div class="products-grid" id="shopGrid"></div>
+            </div>
+        `;
+    }
+
+    function renderAbout() {
+        return `
+            <div class="container">
+                <h2 class="section-title">About Jumli Marsi Bazae</h2>
+                <div style="background: white; padding: 2rem; border-radius: 1rem;">
+                    <p style="margin-bottom: 1rem;">Jumli Marsi Bazae is a social enterprise dedicated to promoting organic farming in the Jumla district of Nepal. We work directly with local farmers to bring you the highest quality organic products.</p>
+                    <p style="margin-bottom: 1rem;">Our mission is to preserve traditional farming practices while providing fair prices to farmers and healthy products to consumers.</p>
+                    <h3 style="color: var(--primary-green); margin-top: 1rem;">Our Values</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>🌱 Organic & Sustainable Farming</li>
+                        <li>🤝 Fair Trade Practices</li>
+                        <li>🏔️ Supporting Local Communities</li>
+                        <li>💚 Chemical-Free Products</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderHelp() {
+        return `
+            <div class="container">
+                <h2 class="section-title">Help & Support</h2>
+                <div style="background: white; padding: 2rem; border-radius: 1rem;">
+                    <h3>📞 Contact Us</h3>
+                    <p>Phone: +977-98XXXXXXXX</p>
+                    <p>Email: support@jumlimarsi.com</p>
+                    <h3 style="margin-top: 1rem;">📱 WhatsApp Support</h3>
+                    <p>+977-98XXXXXXXX (9 AM - 6 PM)</p>
+                    <h3 style="margin-top: 1rem;">📧 Email Support</h3>
+                    <p>Response within 24 hours</p>
+                    <h3 style="margin-top: 1rem;">📍 Office Location</h3>
+                    <p>Khalanga Bazar, Jumla, Karnali Province, Nepal</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderAdminPanel() {
+        if (!currentUser?.isAdmin) return '<div class="container"><p>Admin access only</p></div>';
+        const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+        return `
+            <div class="container">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card"><h3>Total Users</h3><p id="adminTotalUsers">${users.length}</p></div>
+                    <div class="stat-card"><h3>Total Orders</h3><p id="adminTotalOrders">${orders.length}</p></div>
+                    <div class="stat-card"><h3>Total Revenue</h3><p>NPR ${totalRevenue}</p></div>
+                    <div class="stat-card"><h3>Products</h3><p>${products.length}</p></div>
+                </div>
+                <div class="admin-panel">
+                    <h3>➕ Add New Product</h3>
+                    <div class="form-group"><input type="text" id="newProdName" placeholder="Product Name"></div>
+                    <div class="form-group"><input type="number" id="newProdPrice" placeholder="Price (NPR)"></div>
+                    <div class="form-group"><input type="text" id="newProdImage" placeholder="Image URL"></div>
+                    <button class="btn-primary" id="adminAddProduct">Add Product</button>
+                </div>
+                <div class="admin-panel">
+                    <h3>📦 Manage Products</h3>
+                    <div id="adminProductsList" class="products-grid"></div>
+                </div>
+                <div class="admin-panel">
+                    <h3>👥 All Users</h3>
+                    <div id="adminUsersList"></div>
+                </div>
+                <div class="admin-panel">
+                    <h3>📋 All Orders</h3>
+                    <div id="adminOrdersList"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    function loadProductsIntoGrid(containerId, isShop = true) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = products.map(p => `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300'">
-                <h3 style="margin: 0.5rem 0;">${product.name}</h3>
-                <p style="color: #2563eb; font-weight: 700;">$${product.price.toFixed(2)}</p>
-                <button class="primary-btn" onclick="addToCart(${product.id})" style="width: 100%; margin-top: 0.5rem;">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
+                <img class="product-image" src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300'">
+                <div class="product-info">
+                    <h3 class="product-title">${p.name}</h3>
+                    <p>${p.description || 'Organic product'}</p>
+                    <div class="product-price">NPR ${p.price}</div>
+                    ${isShop ? `<button class="add-to-cart" onclick="addToCart(${p.id})"><i class="fas fa-shopping-cart"></i> Add to Cart</button>` : ''}
+                </div>
             </div>
         `).join('');
     }
@@ -480,175 +658,116 @@
         const product = products.find(p => p.id === productId);
         if (!product) return;
         const existing = cart.find(i => i.id === productId);
-        if (existing) {
-            existing.quantity++;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
+        if (existing) existing.quantity++;
+        else cart.push({ ...product, quantity: 1 });
+        updateCartUI();
         alert(`${product.name} added to cart!`);
     };
 
-    function checkout() {
-        if (cart.length === 0) {
-            alert('Cart is empty!');
-            return;
+    function updateCartUI() {
+        const count = cart.reduce((s, i) => s + i.quantity, 0);
+        document.getElementById('cartCount').innerText = count;
+        const cartItemsDiv = document.getElementById('cartItemsList');
+        if (cartItemsDiv) {
+            if (cart.length === 0) cartItemsDiv.innerHTML = '<p>Cart is empty</p>';
+            else {
+                cartItemsDiv.innerHTML = cart.map(item => `
+                    <div style="border-bottom: 1px solid #ddd; padding: 0.5rem; display: flex; justify-content: space-between;">
+                        <div><strong>${item.name}</strong><br>NPR ${item.price} x ${item.quantity}</div>
+                        <div><button class="btn-danger" onclick="removeFromCart(${item.id})">Remove</button></div>
+                    </div>
+                `).join('');
+            }
         }
-        const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        document.getElementById('cartTotal').innerText = total;
+    }
+
+    window.removeFromCart = function(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCartUI();
+    };
+
+    function placeOrder() {
+        if (cart.length === 0) { alert('Cart is empty'); return; }
+        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
         const newOrder = {
             id: Date.now(),
             userId: currentUser.email,
+            userName: currentUser.name,
             items: JSON.parse(JSON.stringify(cart)),
             total: total,
             date: new Date().toISOString(),
-            status: 'Completed'
+            status: 'Pending'
         };
         orders.push(newOrder);
         saveOrders();
-        
-        // Create billing record
-        alert(`✅ Order placed!\nTotal: $${total.toFixed(2)}\nCheck Billing tab for invoice.`);
+        alert(`✅ Order placed successfully!\nTotal: NPR ${total}\nYou will receive confirmation soon.`);
         cart = [];
-        renderBillingHistory();
-        if (document.querySelector('.tab-btn.active')?.dataset.tab === 'admin') {
-            renderAdminPanel();
-        }
+        updateCartUI();
+        document.getElementById('cartSidebar').classList.remove('open');
+        if (currentSection === 'admin') loadSection('admin');
     }
 
-    function renderBillingHistory() {
-        const container = document.getElementById('billingHistory');
-        if (!container) return;
-        const userOrders = orders.filter(o => o.userId === currentUser.email);
-        if (userOrders.length === 0) {
-            container.innerHTML = '<div class="billing-card">No orders yet. Start shopping!</div>';
-            return;
-        }
-        container.innerHTML = userOrders.map(order => `
-            <div class="billing-card">
-                <h3>Order #${order.id}</h3>
-                <p><strong>Date:</strong> ${new Date(order.date).toLocaleString()}</p>
-                <p><strong>Status:</strong> ${order.status}</p>
-                ${order.items.map(item => `<div class="invoice-item"><span>${item.name} x ${item.quantity}</span><span>$${(item.price * item.quantity).toFixed(2)}</span></div>`).join('')}
-                <div class="total-amount">Total: $${order.total.toFixed(2)}</div>
-                <button class="primary-btn" style="margin-top: 1rem;" onclick="downloadInvoice(${order.id})"><i class="fas fa-download"></i> Download Invoice</button>
-            </div>
-        `).join('');
+    function loadSection(section) {
+        currentSection = section;
+        const content = document.getElementById('contentArea');
+        if (section === 'home') content.innerHTML = renderHome();
+        else if (section === 'products') { content.innerHTML = renderProducts(); setTimeout(() => loadProductsIntoGrid('productsGrid', false), 100); }
+        else if (section === 'shop') { content.innerHTML = renderShop(); setTimeout(() => loadProductsIntoGrid('shopGrid', true), 100); }
+        else if (section === 'about') content.innerHTML = renderAbout();
+        else if (section === 'help') content.innerHTML = renderHelp();
+        else if (section === 'admin') { content.innerHTML = renderAdminPanel(); loadAdminData(); }
+        
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        document.querySelector(`.nav-link[data-section="${section}"]`)?.classList.add('active');
     }
 
-    window.downloadInvoice = function(orderId) {
-        const order = orders.find(o => o.id === orderId);
-        if (!order) return;
-        const invoiceText = `URBANCART INVOICE\nOrder: ${order.id}\nDate: ${new Date(order.date).toLocaleString()}\nCustomer: ${order.userId}\n\nItems:\n${order.items.map(i => `${i.name} x ${i.quantity} = $${(i.price * i.quantity).toFixed(2)}`).join('\n')}\n\nTOTAL: $${order.total.toFixed(2)}\nThank you!`;
-        const blob = new Blob([invoiceText], {type: 'text/plain'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `invoice_${order.id}.txt`;
-        a.click();
-        URL.revokeObjectURL(a.href);
-    };
-
-    // ==================== ADMIN PANEL ====================
-    function renderAdminPanel() {
+    function loadAdminData() {
         if (!currentUser?.isAdmin) return;
+        document.getElementById('adminTotalUsers').innerText = users.length;
+        document.getElementById('adminTotalOrders').innerText = orders.length;
         
-        document.getElementById('totalUsers').innerText = users.length;
-        document.getElementById('totalOrders').innerText = orders.length;
-        const revenue = orders.reduce((sum, o) => sum + o.total, 0);
-        document.getElementById('totalRevenue').innerText = `$${revenue.toFixed(2)}`;
-        
-        // Admin products grid
-        const adminGrid = document.getElementById('adminProductsGrid');
-        if (adminGrid) {
-            adminGrid.innerHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" style="height: 150px;">
-                    <h4>${product.name}</h4>
-                    <p>$${product.price}</p>
-                    <button class="danger-btn" onclick="deleteProduct(${product.id})">Delete</button>
-                </div>
+        const adminProductsDiv = document.getElementById('adminProductsList');
+        if (adminProductsDiv) {
+            adminProductsDiv.innerHTML = products.map(p => `
+                <div class="product-card"><img src="${p.image}" style="height: 150px;"><h4>${p.name}</h4><p>NPR ${p.price}</p><button class="btn-danger" onclick="deleteProduct(${p.id})">Delete</button></div>
             `).join('');
         }
         
-        // Users list
-        const usersListDiv = document.getElementById('usersList');
-        usersListDiv.innerHTML = users.map(u => `
-            <div class="user-item">
-                <span>${u.email} ${u.isAdmin ? '👑 Admin' : '👤 User'}</span>
-                ${!u.isAdmin ? `<button class="danger-btn" onclick="deleteUser('${u.email}')">Remove</button>` : ''}
-            </div>
-        `).join('');
+        const usersDiv = document.getElementById('adminUsersList');
+        if (usersDiv) {
+            usersDiv.innerHTML = users.map(u => `<div style="padding: 0.5rem; border-bottom: 1px solid #ddd;">${u.name} - ${u.email} - ${u.phone} ${u.isAdmin ? '(Admin)' : ''}</div>`).join('');
+        }
         
-        // Orders list
-        const ordersListDiv = document.getElementById('ordersList');
-        ordersListDiv.innerHTML = orders.map(o => `
-            <div class="order-item">
-                <div><strong>${o.id}</strong><br>${o.userEmail || o.userId}<br>${new Date(o.date).toLocaleDateString()}</div>
-                <div>$${o.total.toFixed(2)}</div>
-                <button class="danger-btn" onclick="deleteOrder(${o.id})">Delete</button>
-            </div>
-        `).join('');
+        const ordersDiv = document.getElementById('adminOrdersList');
+        if (ordersDiv) {
+            ordersDiv.innerHTML = orders.map(o => `<div style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Order #${o.id} - ${o.userName} - NPR ${o.total} - ${new Date(o.date).toLocaleDateString()}</div>`).join('');
+        }
     }
-    
+
     window.deleteProduct = function(id) {
         products = products.filter(p => p.id !== id);
         saveProducts();
-        renderProducts();
-        if (currentUser?.isAdmin) renderAdminPanel();
-        alert('Product deleted');
+        loadSection('admin');
+        if (currentSection === 'shop') loadSection('shop');
     };
-    
-    window.deleteUser = function(email) {
-        if (email === currentUser?.email) {
-            alert('Cannot delete yourself while logged in');
-            return;
-        }
-        users = users.filter(u => u.email !== email);
-        saveUsers();
-        renderAdminPanel();
-        alert('User deleted');
-    };
-    
-    window.deleteOrder = function(id) {
-        orders = orders.filter(o => o.id !== id);
-        saveOrders();
-        renderAdminPanel();
-        if (document.getElementById('billingTab').classList.contains('active')) renderBillingHistory();
-        alert('Order deleted');
-    };
-    
-    document.getElementById('addProductBtn')?.addEventListener('click', () => {
-        const name = document.getElementById('prodName').value;
-        const price = parseFloat(document.getElementById('prodPrice').value);
-        const image = document.getElementById('prodImage').value;
-        if (!name || isNaN(price)) {
-            alert('Enter valid name and price');
-            return;
-        }
-        const newProduct = { id: nextProductId++, name, price, image: image || 'https://via.placeholder.com/300' };
-        products.push(newProduct);
+
+    document.getElementById('adminAddProduct')?.addEventListener('click', () => {
+        const name = document.getElementById('newProdName').value;
+        const price = parseFloat(document.getElementById('newProdPrice').value);
+        const image = document.getElementById('newProdImage').value || 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop';
+        if (!name || isNaN(price)) { alert('Enter valid details'); return; }
+        products.push({ id: Date.now(), name, price, image, description: 'Organic product' });
         saveProducts();
-        renderProducts();
-        renderAdminPanel();
-        document.getElementById('prodName').value = '';
-        document.getElementById('prodPrice').value = '';
-        document.getElementById('prodImage').value = '';
+        loadSection('admin');
+        if (currentSection === 'shop') loadSection('shop');
         alert('Product added!');
     });
-    
-    // ==================== TAB SWITCHING ====================
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-        document.getElementById(`${tabId}Tab`).classList.add('active');
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
-        
-        if (tabId === 'billing') renderBillingHistory();
-        if (tabId === 'admin' && currentUser?.isAdmin) renderAdminPanel();
-        if (tabId === 'shop') renderProducts();
-    }
-    
-    // ==================== INIT & AUTH UI ====================
+
+    // Initialize App
     function initApp() {
-        const savedUser = localStorage.getItem('ecom_currentUser');
+        const savedUser = localStorage.getItem('agri_currentUser');
         if (savedUser) {
             const userData = JSON.parse(savedUser);
             const foundUser = users.find(u => u.email === userData.email);
@@ -656,64 +775,55 @@
                 currentUser = foundUser;
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('appContainer').style.display = 'block';
-                document.getElementById('userEmailDisplay').innerText = currentUser.email;
-                
-                if (currentUser.isAdmin) {
-                    document.getElementById('adminTabBtn').style.display = 'block';
-                } else {
-                    document.getElementById('adminTabBtn').style.display = 'none';
-                    if (document.querySelector('.tab-btn.active')?.dataset.tab === 'admin') {
-                        switchTab('shop');
-                    }
-                }
-                renderProducts();
-                renderBillingHistory();
+                document.getElementById('userNameDisplay').innerText = `🌾 ${currentUser.name}`;
+                if (currentUser.isAdmin) document.getElementById('adminNavLink').style.display = 'block';
+                loadSection('home');
                 return;
             }
         }
         document.getElementById('authModal').style.display = 'flex';
         document.getElementById('appContainer').style.display = 'none';
     }
-    
-    // Auth flow
-    let isLoginMode = true;
+
+    // Auth UI
+    let isLoginMode = false;
     const authTitle = document.getElementById('authTitle');
     const submitBtn = document.getElementById('submitAuthBtn');
     const switchBtn = document.getElementById('switchAuthBtn');
-    const emailInput = document.getElementById('emailInput');
-    const passwordInput = document.getElementById('passwordInput');
     
     function updateAuthUI() {
-        authTitle.innerText = isLoginMode ? 'Welcome Back' : 'Create Account';
-        submitBtn.innerText = isLoginMode ? 'Login' : 'Register';
-        switchBtn.innerHTML = isLoginMode ? "Don't have an account? <span>Register</span>" : "Already have an account? <span>Login</span>";
+        if (isLoginMode) {
+            authTitle.innerText = '🔐 Login to Your Account';
+            submitBtn.innerText = 'Login';
+            switchBtn.innerHTML = "Don't have an account? <span>Register</span>";
+            document.getElementById('fullName').style.display = 'none';
+            document.getElementById('phoneNo').style.display = 'none';
+        } else {
+            authTitle.innerText = '🌾 Register with Jumli Marsi';
+            submitBtn.innerText = 'Register';
+            switchBtn.innerHTML = "Already have an account? <span>Login</span>";
+            document.getElementById('fullName').style.display = 'block';
+            document.getElementById('phoneNo').style.display = 'block';
+        }
     }
     
     submitBtn.onclick = () => {
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-        if (!email || !password) {
-            alert('Please fill all fields');
-            return;
-        }
-        if (!email.endsWith('@gmail.com')) {
-            alert('Only Gmail addresses are allowed (@gmail.com)');
-            return;
-        }
         if (isLoginMode) {
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
             if (loginUser(email, password)) {
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('appContainer').style.display = 'block';
-                document.getElementById('userEmailDisplay').innerText = currentUser.email;
-                if (currentUser.isAdmin) document.getElementById('adminTabBtn').style.display = 'block';
-                else document.getElementById('adminTabBtn').style.display = 'none';
-                renderProducts();
-                renderBillingHistory();
-                emailInput.value = '';
-                passwordInput.value = '';
+                document.getElementById('userNameDisplay').innerText = `🌾 ${currentUser.name}`;
+                if (currentUser.isAdmin) document.getElementById('adminNavLink').style.display = 'block';
+                loadSection('home');
             }
         } else {
-            if (registerUser(email, password)) {
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('phoneNo').value;
+            const password = document.getElementById('regPassword').value;
+            if (registerUser(name, email, phone, password)) {
                 isLoginMode = true;
                 updateAuthUI();
             }
@@ -726,35 +836,24 @@
     };
     
     document.getElementById('logoutBtn')?.addEventListener('click', logout);
+    document.getElementById('cartBtn')?.addEventListener('click', () => document.getElementById('cartSidebar').classList.add('open'));
+    document.getElementById('closeCartBtn')?.addEventListener('click', () => document.getElementById('cartSidebar').classList.remove('open'));
+    document.getElementById('checkoutBtn')?.addEventListener('click', placeOrder);
     
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tab = btn.dataset.tab;
-            if (tab === 'admin' && !currentUser?.isAdmin) {
-                alert('Admin access only');
-                return;
-            }
-            switchTab(tab);
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const section = e.target.dataset.section;
+            if (section === 'admin' && !currentUser?.isAdmin) { alert('Admin access only'); return; }
+            loadSection(section);
         });
     });
     
-    // Add checkout button to shop tab
-    const shopTab = document.getElementById('shopTab');
-    const checkoutBtn = document.createElement('button');
-    checkoutBtn.innerText = '🛒 Checkout & Place Order';
-    checkoutBtn.className = 'primary-btn';
-    checkoutBtn.style.marginTop = '2rem';
-    checkoutBtn.style.width = '100%';
-    checkoutBtn.style.padding = '1rem';
-    checkoutBtn.onclick = checkout;
-    shopTab.appendChild(checkoutBtn);
-    
-    // Initialize default admin if no users exist
     if (users.length === 0) {
-        users.push({ email: 'admin@gmail.com', password: 'admin123', isAdmin: true });
+        users.push({ name: 'Admin User', email: 'admin@jumli.com', phone: '9800000000', password: 'admin123', isAdmin: true, joinDate: new Date().toISOString() });
         saveUsers();
     }
     
+    updateAuthUI();
     initApp();
 </script>
 </body>
