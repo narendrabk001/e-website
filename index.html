@@ -1,860 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jumli Marsi Bazae | Organic Agricultural E-mart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Narendra BK — Web Developer & Graphic Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #F8F5F0;
+      --dark: #1A1A18;
+      --accent: #2A5C8F;
+      --accent-light: #E8EFF7;
+      --muted: #6B6B65;
+      --border: rgba(26,26,24,0.1);
+      --gold: #B89A5A;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #fef8e7;
-            color: #2d3e2b;
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Color Theme: Green (#2e7d32), Red (#d32f2f), White (#ffffff) */
-        :root {
-            --primary-green: #2e7d32;
-            --primary-green-light: #4caf50;
-            --primary-red: #d32f2f;
-            --primary-red-light: #ef5350;
-            --pure-white: #ffffff;
-            --cream-bg: #fef8e7;
-            --dark-text: #1b5e20;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Auth Modal */
-        .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
 
-        .auth-card {
-            background: var(--pure-white);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
-            border-top: 5px solid var(--primary-green);
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
 
-        .auth-card h2 {
-            color: var(--primary-green);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
 
-        .input-group {
-            margin-bottom: 1rem;
-        }
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--dark); }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #2d3e2b;
-        }
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 6rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #c8e6c9;
-            border-radius: 0.5rem;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(42,92,143,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary-green);
-            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
-        }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 5rem;
+      align-items: center;
+    }
 
-        .auth-btn {
-            width: 100%;
-            padding: 0.75rem;
-            background: var(--primary-green);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            font-size: 1rem;
-        }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow .line { width: 40px; height: 1px; background: var(--gold); }
+    .hero-eyebrow span {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500;
+    }
 
-        .auth-btn:hover {
-            background: var(--primary-green-light);
-        }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 78px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
 
-        .switch-auth {
-            text-align: center;
-            margin-top: 1rem;
-            color: #666;
-            cursor: pointer;
-        }
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
 
-        .switch-auth span {
-            color: var(--primary-green);
-            font-weight: 600;
-        }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-        /* Main App */
-        .app-container {
-            display: none;
-        }
+    .btn-dark {
+      padding: 13px 32px;
+      background: var(--dark);
+      color: var(--cream);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-dark:hover { background: var(--accent); transform: translateY(-1px); }
 
-        /* Header & Navigation */
-        .header {
-            background: var(--pure-white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    .btn-outline {
+      padding: 13px 32px;
+      background: transparent;
+      color: var(--dark);
+      border: 1px solid var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover { background: var(--dark); color: var(--cream); transform: translateY(-1px); }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+    .hero-avatar {
+      position: relative;
+    }
+    .avatar-frame {
+      width: 340px; height: 400px;
+      background: var(--accent-light);
+      border: 1px solid rgba(42,92,143,0.15);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; right: -2px;
+      width: 100%; height: 100%;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+    }
+    .avatar-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 90px;
+      font-weight: 300;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+    .avatar-tag {
+      position: absolute;
+      bottom: 1.5rem; left: -1rem;
+      background: var(--dark);
+      color: var(--cream);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+    }
 
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--primary-green);
-        }
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
 
-        .logo span {
-            color: var(--primary-red);
-        }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
+    /* ── ABOUT ── */
+    #about { background: white; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-box {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
 
-        .nav-link {
-            text-decoration: none;
-            color: #2d3e2b;
-            font-weight: 500;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
+    /* ── SKILLS ── */
+    #skills { background: var(--cream); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .skill-item {
+      background: var(--cream);
+      padding: 2rem 1.5rem;
+      transition: background 0.25s;
+    }
+    .skill-item:hover { background: white; }
+    .skill-icon {
+      width: 40px; height: 40px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 20px;
+    }
+    .skill-name {
+      font-size: 15px; font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .skill-bar-wrap {
+      margin-top: 0.8rem;
+      height: 2px;
+      background: var(--border);
+    }
+    .skill-bar {
+      height: 100%;
+      background: var(--accent);
+      transition: width 1s ease;
+    }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-green);
-            font-weight: 600;
-        }
+    /* ── PROJECTS ── */
+    #projects { background: white; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(42,92,143,0.08);
+    }
+    .proj-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: rgba(42,92,143,0.2);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .proj-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      margin-bottom: 0.8rem;
+    }
+    .proj-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .proj-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1.2rem;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .proj-link::after { content: '→'; font-size: 14px; }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); color: var(--cream); }
+    #contact .section-title { color: var(--cream); }
+    #contact .section-num { color: var(--gold); }
 
-        .user-badge {
-            background: var(--primary-green);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-        }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: rgba(248,245,240,0.6);
+      margin-bottom: 1.5rem;
+    }
+    .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid rgba(248,245,240,0.1);
+      transition: border-color 0.25s;
+    }
+    .contact-item:hover { border-color: var(--gold); }
+    .ci-icon {
+      font-size: 18px;
+      width: 36px;
+      text-align: center;
+      opacity: 0.7;
+    }
+    .ci-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+    .ci-value {
+      font-size: 14px;
+      color: var(--cream);
+    }
 
-        .logout-btn {
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem 1.2rem;
+      background: rgba(248,245,240,0.05);
+      border: 1px solid rgba(248,245,240,0.15);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.25s;
+      resize: none;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(248,245,240,0.35); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { height: 120px; }
+    .btn-gold {
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 500;
+      align-self: flex-start;
+      transition: opacity 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.85; transform: translateY(-1px); }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+    /* ── FOOTER ── */
+    footer {
+      background: #111110;
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(248,245,240,0.3);
+      letter-spacing: 0.05em;
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text > * {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero h1 { animation-delay: 0.25s; }
+    .hero-desc { animation-delay: 0.4s; }
+    .hero-btns { animation-delay: 0.55s; }
+    .hero-avatar { animation: fadeUp 0.9s 0.4s ease both; }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Section Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: var(--primary-green);
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--primary-red);
-            padding-left: 1rem;
-        }
-
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: var(--pure-white);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1rem;
-        }
-
-        .product-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-price {
-            color: var(--primary-green);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 0.6rem;
-            background: var(--primary-green);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            margin-top: 0.5rem;
-            cursor: pointer;
-        }
-
-        /* Cart Sidebar */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            transition: right 0.3s;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-sidebar.open {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 1rem;
-            background: var(--primary-green);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-
-        .cart-total {
-            padding: 1rem;
-            border-top: 1px solid #ddd;
-            font-weight: 700;
-        }
-
-        /* Admin Panel */
-        .admin-panel {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
-            color: white;
-            padding: 1rem;
-            border-radius: 1rem;
-            text-align: center;
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #c8e6c9;
-            border-radius: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-green);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-        }
-
-        .btn-danger {
-            background: var(--primary-red);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-        }
-
-        footer {
-            background: #1b5e20;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; }
-            .nav-links { justify-content: center; }
-        }
-    </style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { padding: 5rem 2rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .avatar-frame { width: 100%; max-width: 300px; height: 300px; margin: 0 auto; }
+      section { padding: 4rem 2rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Auth Modal -->
-<div id="authModal" class="auth-modal">
-    <div class="auth-card">
-        <h2 id="authTitle">🌾 Welcome to Jumli Marsi</h2>
-        <div id="authForm">
-            <div class="input-group">
-                <label>Full Name</label>
-                <input type="text" id="fullName" placeholder="Enter your name">
-            </div>
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="regEmail" placeholder="you@example.com">
-            </div>
-            <div class="input-group">
-                <label>Phone Number</label>
-                <input type="tel" id="phoneNo" placeholder="98XXXXXXXX">
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="regPassword" placeholder="••••••••">
-            </div>
-            <button class="auth-btn" id="submitAuthBtn">Register</button>
-            <div class="switch-auth" id="switchAuthBtn">
-                Already have an account? <span>Login</span>
-            </div>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Narendra <span>BK</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <div class="line"></div>
+          <span>Available for freelance</span>
         </div>
-    </div>
-</div>
-
-<!-- Main App -->
-<div class="app-container" id="appContainer">
-    <div class="header">
-        <div class="nav-container">
-            <div class="logo">Jumli <span>Marsi</span> Bazae</div>
-            <div class="nav-links">
-                <a class="nav-link active" data-section="home">Home</a>
-                <a class="nav-link" data-section="products">Products</a>
-                <a class="nav-link" data-section="shop">Shop</a>
-                <a class="nav-link" data-section="about">About</a>
-                <a class="nav-link" data-section="help">Help</a>
-                <a class="nav-link" data-section="admin" id="adminNavLink" style="display: none;">Admin Panel</a>
-            </div>
-            <div class="user-info">
-                <span class="user-badge" id="userNameDisplay"></span>
-                <button class="logout-btn" id="logoutBtn">Logout</button>
-                <button class="logout-btn" id="cartBtn" style="background: var(--primary-green);">🛒 Cart (<span id="cartCount">0</span>)</button>
-            </div>
+        <h1>Web Developer<br>&amp; <em>Graphic</em><br>Designer</h1>
+        <p class="hero-desc">
+          Hi, I'm Narendra BK — based in Kathmandu, Nepal. I build clean, performant websites and craft visual identities that leave lasting impressions.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-dark">View My Work</a>
+          <a href="#contact" class="btn-outline">Get in Touch</a>
         </div>
+      </div>
+      <div class="hero-avatar">
+        <div class="avatar-frame">
+          <span class="avatar-initials">NB</span>
+          <span class="avatar-tag">Based in Kathmandu</span>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div id="contentArea"></div>
-
-    <footer>
-        <p>🌾 Jumli Marsi Bazae - Organic Agricultural Products from the Himalayas</p>
-        <p> Jumla, Nepal | 📞 +977-9761435029 | 📧 narendrabk10101@gmail.com.com</p>
-    </footer>
-</div>
-
-<!-- Cart Sidebar -->
-<div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-        <h3>Your Cart</h3>
-        <button id="closeCartBtn" style="background: none; border: none; color: white; font-size: 1.5rem;">&times;</button>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-num">01 /</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a passionate web developer and graphic designer with a keen eye for detail and a love for creating beautiful, functional digital experiences. My work sits at the intersection of technology and design.
+          </p>
+          <p>
+            From responsive websites and interactive interfaces to brand identities and visual systems — I bring ideas to life with precision and creativity.
+          </p>
+          <a href="#contact" class="btn-dark" style="margin-top:1rem; display:inline-block;">Let's Work Together</a>
+        </div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Projects Done</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Satisfaction</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="cartItemsList" class="cart-items"></div>
-    <div class="cart-total">
-        <strong>Total: NPR <span id="cartTotal">0</span></strong>
-        <button id="checkoutBtn" class="btn-primary" style="width: 100%; margin-top: 1rem;">Place Order</button>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-num">02 /</span>
+        <h2 class="section-title">Skills &amp; Expertise</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">HTML &amp; CSS</div>
+          <div class="skill-desc">Semantic markup, responsive layouts, animations</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">⚡</div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-desc">Interactive UIs, DOM manipulation, APIs</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">🎨</div>
+          <div class="skill-name">Graphic Design</div>
+          <div class="skill-desc">Brand identity, print, digital assets</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">🖌️</div>
+          <div class="skill-name">Adobe Suite</div>
+          <div class="skill-desc">Photoshop, Illustrator, InDesign</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">📐</div>
+          <div class="skill-name">Figma / UI</div>
+          <div class="skill-desc">Wireframes, prototypes, design systems</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">📱</div>
+          <div class="skill-name">Responsive Design</div>
+          <div class="skill-desc">Mobile-first, cross-browser compatibility</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+        </div>
+      </div>
     </div>
-</div>
+  </section>
 
-<script>
-    // ==================== DATA MODELS ====================
-    let users = JSON.parse(localStorage.getItem('agri_users')) || [];
-    let products = JSON.parse(localStorage.getItem('agri_products')) || [
-        { id: 1, name: "Jumli Marsi Rice (1kg)", price: 350, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Organic red rice from Jumla" },
-        { id: 2, name: "Organic Buckwheat (1kg)", price: 280, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "High altitude buckwheat" },
-        { id: 3, name: "Local Apple (1kg)", price: 250, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=300&h=300&fit=crop", description: "Fresh Jumla apples" },
-        { id: 4, name: "Ghee (500ml)", price: 600, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Pure local ghee" },
-        { id: 5, name: "Honey (250g)", price: 450, image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop", description: "Wild mountain honey" }
-    ];
-    let orders = JSON.parse(localStorage.getItem('agri_orders')) || [];
-    let currentUser = null;
-    let cart = [];
-    let currentSection = 'home';
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-num">03 /</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="proj-num">01</div>
+          <span class="proj-tag">Web Development</span>
+          <div class="proj-title">Business Landing Page</div>
+          <div class="proj-desc">A modern, responsive landing page for a local business with smooth animations and an integrated contact form.</div>
+          <a href="#" class="proj-link">View Project</a>
+        </div>
+        <div class="project-card">
+          <div class="proj-num">02</div>
+          <span class="proj-tag">Graphic Design</span>
+          <div class="proj-title">Brand Identity</div>
+          <div class="proj-desc">Complete brand identity including logo design, color palette, typography, and brand guidelines for a startup.</div>
+          <a href="#" class="proj-link">View Project</a>
+        </div>
+        <div class="project-card">
+          <div class="proj-num">03</div>
+          <span class="proj-tag">Web + Design</span>
+          <div class="proj-title">Portfolio Website</div>
+          <div class="proj-desc">Custom portfolio website with a unique visual design, fluid animations, and optimized user experience.</div>
+          <a href="#" class="proj-link">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Save functions
-    function saveUsers() { localStorage.setItem('agri_users', JSON.stringify(users)); }
-    function saveProducts() { localStorage.setItem('agri_products', JSON.stringify(products)); }
-    function saveOrders() { localStorage.setItem('agri_orders', JSON.stringify(orders)); }
-
-    // Auth Functions
-    function registerUser(name, email, phone, password) {
-        if (!email || !phone || !password) {
-            alert('Please fill all fields');
-            return false;
-        }
-        if (users.find(u => u.email === email)) {
-            alert('Email already registered!');
-            return false;
-        }
-        users.push({ name, email, phone, password, isAdmin: email === 'admin@jumli.com' || users.length === 0, joinDate: new Date().toISOString() });
-        saveUsers();
-        alert('Registration successful! Please login.');
-        return true;
-    }
-
-    function loginUser(email, password) {
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-            currentUser = user;
-            localStorage.setItem('agri_currentUser', JSON.stringify({ email: user.email, name: user.name, isAdmin: user.isAdmin }));
-            return true;
-        }
-        alert('Invalid email or password');
-        return false;
-    }
-
-    function logout() {
-        currentUser = null;
-        localStorage.removeItem('agri_currentUser');
-        cart = [];
-        document.getElementById('authModal').style.display = 'flex';
-        document.getElementById('appContainer').style.display = 'none';
-    }
-
-    // Render Functions
-    function renderHome() {
-        return `
-            <div class="hero">
-                <h1>🌾 Jumli Marsi Bazar</h1>
-                <p>100% Organic Agricultural Products from the Heart of Jumla, Nepal</p>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-header" style="border-bottom-color: rgba(248,245,240,0.1);">
+        <span class="section-num">04 /</span>
+        <h2 class="section-title">Get In Touch</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-text">
+          <p>Have a project in mind or just want to say hello? I'd love to hear from you. Let's create something great together.</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <span class="ci-icon">✉️</span>
+              <div>
+                <div class="ci-label">Email</div>
+                <div class="ci-value">narendra@email.com</div>
+              </div>
             </div>
-            <div class="container">
-                <h2 class="section-title">Welcome to Our Organic Mart</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem;">We bring the finest organic products from the high Himalayas to your doorstep. Jumli Marsi rice, local apples, buckwheat, and more - all grown naturally with love and care.</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
-                        <i class="fas fa-seedling" style="font-size: 3rem; color: var(--primary-green);"></i>
-                        <h3>100% Organic</h3>
-                        <p>Certified organic products</p>
-                    </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
-                        <i class="fas fa-truck" style="font-size: 3rem; color: var(--primary-green);"></i>
-                        <h3>Free Delivery</h3>
-                        <p>On orders over NPR 2000</p>
-                    </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 1rem; text-align: center;">
-                        <i class="fas fa-leaf" style="font-size: 3rem; color: var(--primary-green);"></i>
-                        <h3>Farm Fresh</h3>
-                        <p>Direct from farmers</p>
-                    </div>
-                </div>
+            <div class="contact-item">
+              <span class="ci-icon">📍</span>
+              <div>
+                <div class="ci-label">Location</div>
+                <div class="ci-value">Kathmandu, Nepal</div>
+              </div>
             </div>
-        `;
-    }
-
-    function renderProducts() {
-        return `
-            <div class="container">
-                <h2 class="section-title">Our Organic Products</h2>
-                <div class="products-grid" id="productsGrid"></div>
+            <div class="contact-item">
+              <span class="ci-icon">📞</span>
+              <div>
+                <div class="ci-label">Phone</div>
+                <div class="ci-value">+977 98XXXXXXXX</div>
+              </div>
             </div>
-        `;
-    }
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="return false;">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Your Email" />
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Your Message"></textarea>
+          <button type="submit" class="btn-gold">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    function renderShop() {
-        return `
-            <div class="container">
-                <h2 class="section-title">Shop Online</h2>
-                <div class="products-grid" id="shopGrid"></div>
-            </div>
-        `;
-    }
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2026 Narendra BK. All rights reserved.</span>
+    <span>Web Developer &amp; Graphic Designer — Kathmandu, Nepal</span>
+  </footer>
 
-    function renderAbout() {
-        return `
-            <div class="container">
-                <h2 class="section-title">About Jumli Marsi Bazar</h2>
-                <div style="background: white; padding: 2rem; border-radius: 1rem;">
-                    <p style="margin-bottom: 1rem;">Jumli Marsi Bazar is a social enterprise dedicated to promoting organic farming in the Jumla district of Nepal. We work directly with local farmers to bring you the highest quality organic products.</p>
-                    <p style="margin-bottom: 1rem;">Our mission is to preserve traditional farming practices while providing fair prices to farmers and healthy products to consumers.</p>
-                    <h3 style="color: var(--primary-green); margin-top: 1rem;">Our Values</h3>
-                    <ul style="margin-left: 2rem;">
-                        <li>🌱 Organic & Sustainable Farming</li>
-                        <li>🤝 Fair Trade Practices</li>
-                        <li>🏔️ Supporting Local Communities</li>
-                        <li>💚 Chemical-Free Products</li>
-                    </ul>
-                </div>
-            </div>
-        `;
-    }
-
-    function renderHelp() {
-        return `
-            <div class="container">
-                <h2 class="section-title">Help & Support</h2>
-                <div style="background: white; padding: 2rem; border-radius: 1rem;">
-                    <h3>📞 Contact Us</h3>
-                    <p>Phone: +977-9761435029</p>
-                    <p>Email: narendrabk10101@gmail.com</p>
-                    <h3 style="margin-top: 1rem;">📱 WhatsApp Support</h3>
-                    <p>+977-9761435029 (9 AM - 6 PM)</p>
-                    <h3 style="margin-top: 1rem;">📧 Email Support</h3>
-                    <p>Response within 24 hours</p>
-                    <h3 style="margin-top: 1rem;">📍 Office Location</h3>
-                    <p>Khalanga Bazar, Jumla, Karnali Province, Nepal</p>
-                </div>
-            </div>
-        `;
-    }
-
-    function renderAdminPanel() {
-        if (!currentUser?.isAdmin) return '<div class="container"><p>Admin access only</p></div>';
-        const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
-        return `
-            <div class="container">
-                <h2 class="section-title">Admin Dashboard</h2>
-                <div class="stats-grid">
-                    <div class="stat-card"><h3>Total Users</h3><p id="adminTotalUsers">${users.length}</p></div>
-                    <div class="stat-card"><h3>Total Orders</h3><p id="adminTotalOrders">${orders.length}</p></div>
-                    <div class="stat-card"><h3>Total Revenue</h3><p>NPR ${totalRevenue}</p></div>
-                    <div class="stat-card"><h3>Products</h3><p>${products.length}</p></div>
-                </div>
-                <div class="admin-panel">
-                    <h3>➕ Add New Product</h3>
-                    <div class="form-group"><input type="text" id="newProdName" placeholder="Product Name"></div>
-                    <div class="form-group"><input type="number" id="newProdPrice" placeholder="Price (NPR)"></div>
-                    <div class="form-group"><input type="text" id="newProdImage" placeholder="Image URL"></div>
-                    <button class="btn-primary" id="adminAddProduct">Add Product</button>
-                </div>
-                <div class="admin-panel">
-                    <h3>📦 Manage Products</h3>
-                    <div id="adminProductsList" class="products-grid"></div>
-                </div>
-                <div class="admin-panel">
-                    <h3>👥 All Users</h3>
-                    <div id="adminUsersList"></div>
-                </div>
-                <div class="admin-panel">
-                    <h3>📋 All Orders</h3>
-                    <div id="adminOrdersList"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    function loadProductsIntoGrid(containerId, isShop = true) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = products.map(p => `
-            <div class="product-card">
-                <img class="product-image" src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300'">
-                <div class="product-info">
-                    <h3 class="product-title">${p.name}</h3>
-                    <p>${p.description || 'Organic product'}</p>
-                    <div class="product-price">NPR ${p.price}</div>
-                    ${isShop ? `<button class="add-to-cart" onclick="addToCart(${p.id})"><i class="fas fa-shopping-cart"></i> Add to Cart</button>` : ''}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    window.addToCart = function(productId) {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-        const existing = cart.find(i => i.id === productId);
-        if (existing) existing.quantity++;
-        else cart.push({ ...product, quantity: 1 });
-        updateCartUI();
-        alert(`${product.name} added to cart!`);
-    };
-
-    function updateCartUI() {
-        const count = cart.reduce((s, i) => s + i.quantity, 0);
-        document.getElementById('cartCount').innerText = count;
-        const cartItemsDiv = document.getElementById('cartItemsList');
-        if (cartItemsDiv) {
-            if (cart.length === 0) cartItemsDiv.innerHTML = '<p>Cart is empty</p>';
-            else {
-                cartItemsDiv.innerHTML = cart.map(item => `
-                    <div style="border-bottom: 1px solid #ddd; padding: 0.5rem; display: flex; justify-content: space-between;">
-                        <div><strong>${item.name}</strong><br>NPR ${item.price} x ${item.quantity}</div>
-                        <div><button class="btn-danger" onclick="removeFromCart(${item.id})">Remove</button></div>
-                    </div>
-                `).join('');
-            }
-        }
-        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-        document.getElementById('cartTotal').innerText = total;
-    }
-
-    window.removeFromCart = function(id) {
-        cart = cart.filter(i => i.id !== id);
-        updateCartUI();
-    };
-
-    function placeOrder() {
-        if (cart.length === 0) { alert('Cart is empty'); return; }
-        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-        const newOrder = {
-            id: Date.now(),
-            userId: currentUser.email,
-            userName: currentUser.name,
-            items: JSON.parse(JSON.stringify(cart)),
-            total: total,
-            date: new Date().toISOString(),
-            status: 'Pending'
-        };
-        orders.push(newOrder);
-        saveOrders();
-        alert(`✅ Order placed successfully!\nTotal: NPR ${total}\nYou will receive confirmation soon.`);
-        cart = [];
-        updateCartUI();
-        document.getElementById('cartSidebar').classList.remove('open');
-        if (currentSection === 'admin') loadSection('admin');
-    }
-
-    function loadSection(section) {
-        currentSection = section;
-        const content = document.getElementById('contentArea');
-        if (section === 'home') content.innerHTML = renderHome();
-        else if (section === 'products') { content.innerHTML = renderProducts(); setTimeout(() => loadProductsIntoGrid('productsGrid', false), 100); }
-        else if (section === 'shop') { content.innerHTML = renderShop(); setTimeout(() => loadProductsIntoGrid('shopGrid', true), 100); }
-        else if (section === 'about') content.innerHTML = renderAbout();
-        else if (section === 'help') content.innerHTML = renderHelp();
-        else if (section === 'admin') { content.innerHTML = renderAdminPanel(); loadAdminData(); }
-        
-        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-        document.querySelector(`.nav-link[data-section="${section}"]`)?.classList.add('active');
-    }
-
-    function loadAdminData() {
-        if (!currentUser?.isAdmin) return;
-        document.getElementById('adminTotalUsers').innerText = users.length;
-        document.getElementById('adminTotalOrders').innerText = orders.length;
-        
-        const adminProductsDiv = document.getElementById('adminProductsList');
-        if (adminProductsDiv) {
-            adminProductsDiv.innerHTML = products.map(p => `
-                <div class="product-card"><img src="${p.image}" style="height: 150px;"><h4>${p.name}</h4><p>NPR ${p.price}</p><button class="btn-danger" onclick="deleteProduct(${p.id})">Delete</button></div>
-            `).join('');
-        }
-        
-        const usersDiv = document.getElementById('adminUsersList');
-        if (usersDiv) {
-            usersDiv.innerHTML = users.map(u => `<div style="padding: 0.5rem; border-bottom: 1px solid #ddd;">${u.name} - ${u.email} - ${u.phone} ${u.isAdmin ? '(Admin)' : ''}</div>`).join('');
-        }
-        
-        const ordersDiv = document.getElementById('adminOrdersList');
-        if (ordersDiv) {
-            ordersDiv.innerHTML = orders.map(o => `<div style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Order #${o.id} - ${o.userName} - NPR ${o.total} - ${new Date(o.date).toLocaleDateString()}</div>`).join('');
-        }
-    }
-
-    window.deleteProduct = function(id) {
-        products = products.filter(p => p.id !== id);
-        saveProducts();
-        loadSection('admin');
-        if (currentSection === 'shop') loadSection('shop');
-    };
-
-    document.getElementById('adminAddProduct')?.addEventListener('click', () => {
-        const name = document.getElementById('newProdName').value;
-        const price = parseFloat(document.getElementById('newProdPrice').value);
-        const image = document.getElementById('newProdImage').value || 'https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=300&h=300&fit=crop';
-        if (!name || isNaN(price)) { alert('Enter valid details'); return; }
-        products.push({ id: Date.now(), name, price, image, description: 'Organic product' });
-        saveProducts();
-        loadSection('admin');
-        if (currentSection === 'shop') loadSection('shop');
-        alert('Product added!');
-    });
-
-    // Initialize App
-    function initApp() {
-        const savedUser = localStorage.getItem('agri_currentUser');
-        if (savedUser) {
-            const userData = JSON.parse(savedUser);
-            const foundUser = users.find(u => u.email === userData.email);
-            if (foundUser) {
-                currentUser = foundUser;
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('appContainer').style.display = 'block';
-                document.getElementById('userNameDisplay').innerText = `🌾 ${currentUser.name}`;
-                if (currentUser.isAdmin) document.getElementById('adminNavLink').style.display = 'block';
-                loadSection('home');
-                return;
-            }
-        }
-        document.getElementById('authModal').style.display = 'flex';
-        document.getElementById('appContainer').style.display = 'none';
-    }
-
-    // Auth UI
-    let isLoginMode = false;
-    const authTitle = document.getElementById('authTitle');
-    const submitBtn = document.getElementById('submitAuthBtn');
-    const switchBtn = document.getElementById('switchAuthBtn');
-    
-    function updateAuthUI() {
-        if (isLoginMode) {
-            authTitle.innerText = '🔐 Login to Your Account';
-            submitBtn.innerText = 'Login';
-            switchBtn.innerHTML = "Don't have an account? <span>Register</span>";
-            document.getElementById('fullName').style.display = 'none';
-            document.getElementById('phoneNo').style.display = 'none';
-        } else {
-            authTitle.innerText = '🌾 Register with Jumli Marsi';
-            submitBtn.innerText = 'Register';
-            switchBtn.innerHTML = "Already have an account? <span>Login</span>";
-            document.getElementById('fullName').style.display = 'block';
-            document.getElementById('phoneNo').style.display = 'block';
-        }
-    }
-    
-    submitBtn.onclick = () => {
-        if (isLoginMode) {
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
-            if (loginUser(email, password)) {
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('appContainer').style.display = 'block';
-                document.getElementById('userNameDisplay').innerText = `🌾 ${currentUser.name}`;
-                if (currentUser.isAdmin) document.getElementById('adminNavLink').style.display = 'block';
-                loadSection('home');
-            }
-        } else {
-            const name = document.getElementById('fullName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('phoneNo').value;
-            const password = document.getElementById('regPassword').value;
-            if (registerUser(name, email, phone, password)) {
-                isLoginMode = true;
-                updateAuthUI();
-            }
-        }
-    };
-    
-    switchBtn.onclick = () => {
-        isLoginMode = !isLoginMode;
-        updateAuthUI();
-    };
-    
-    document.getElementById('logoutBtn')?.addEventListener('click', logout);
-    document.getElementById('cartBtn')?.addEventListener('click', () => document.getElementById('cartSidebar').classList.add('open'));
-    document.getElementById('closeCartBtn')?.addEventListener('click', () => document.getElementById('cartSidebar').classList.remove('open'));
-    document.getElementById('checkoutBtn')?.addEventListener('click', placeOrder);
-    
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const section = e.target.dataset.section;
-            if (section === 'admin' && !currentUser?.isAdmin) { alert('Admin access only'); return; }
-            loadSection(section);
-        });
-    });
-    
-    if (users.length === 0) {
-        users.push({ name: 'Admin User', email: 'admin@jumli.com', phone: '9800000000', password: 'admin123', isAdmin: true, joinDate: new Date().toISOString() });
-        saveUsers();
-    }
-    
-    updateAuthUI();
-    initApp();
-</script>
 </body>
 </html>
